@@ -10,33 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* COMPLETE STATIC BACKGROUND IMAGE */
-        body { 
-            font-family: 'Crimson Text', serif; 
-            color: #f5f5dc; 
-            overflow-x: hidden; 
-            background-image: url('https://i.imgur.com/a/q1UBHkFj.png');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-        
-        /* Dark overlay for readability */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 15, 46, 0.4);
-            z-index: -1;
-            pointer-events: none;
-        }
-        
+        body { font-family: 'Crimson Text', serif; background: linear-gradient(135deg, #0A0F2E 0%, #1a1f3a 50%, #0A0F2E 100%); color: #f5f5dc; overflow-x: hidden; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%230A0F2E"/><path d="M0 0L100 100M100 0L0 100" stroke="%231a1f3a" stroke-width="0.5" opacity="0.1"/></svg>'); background-size: 50px 50px; }
         header { position: fixed; top: 0; width: 100%; padding: 1rem 5%; background: linear-gradient(180deg, rgba(61, 43, 31, 0.95) 0%, rgba(40, 28, 20, 0.95) 100%); backdrop-filter: blur(10px); border-bottom: 4px solid #8B6914; border-top: 3px solid #CD853F; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3); z-index: 1000; display: flex; justify-content: space-between; align-items: center; background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 105, 20, 0.1) 2px, rgba(139, 105, 20, 0.1) 4px); }
         .logo-container { display: flex; align-items: center; gap: 1.5rem; padding: 0.5rem; background: rgba(20, 15, 10, 0.6); border: 3px solid #8B6914; border-radius: 8px; box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.3), 0 0 15px rgba(139, 105, 20, 0.5); }
         .logo-img { height: 65px; filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); animation: logoGlow 3s infinite alternate; }
@@ -52,7 +26,7 @@
         @keyframes twinkle { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.9); } }
         .cta-link:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 40px rgba(0, 191, 255, 0.8), inset 0 2px 0 rgba(205, 133, 63, 0.7), 0 6px 0 rgba(0, 0, 0, 0.4); transform: translateY(-3px); }
         
-        /* HERO SECTION - Transparent to show background */
+        /* HERO SECTION */
         .hero { 
             min-height: 100vh; 
             display: flex; 
@@ -63,9 +37,12 @@
             padding: 120px 5% 50px; 
             position: relative; 
             overflow: hidden; 
+            background: linear-gradient(135deg, rgba(20, 15, 10, 0.95) 0%, rgba(10, 15, 46, 0.9) 50%, rgba(20, 15, 10, 0.95) 100%), radial-gradient(circle at 50% 50%, rgba(139, 105, 20, 0.15) 0%, transparent 70%);
         }
         
-        .hero-content { position: relative; z-index: 2; padding: 3rem; background: rgba(40, 28, 20, 0.9); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 191, 255, 0.5), inset 0 0 60px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.7); max-width: 1000px; }
+        .hero:before { content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 191, 255, 0.03) 35px, rgba(0, 191, 255, 0.03) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 215, 0, 0.02) 35px, rgba(255, 215, 0, 0.02) 70px); z-index: 0; opacity: 0.6; }
+        
+        .hero-content { position: relative; z-index: 2; padding: 3rem; background: rgba(40, 28, 20, 0.85); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 191, 255, 0.5), inset 0 0 60px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.7); max-width: 1000px; }
         .hero-content:before, .hero-content:after { content: '◆'; position: absolute; font-size: 2rem; color: #00BFFF; text-shadow: 0 0 15px rgba(0, 191, 255, 1); animation: pulse 3s infinite; }
         .hero-content:before { top: -15px; left: 50%; transform: translateX(-50%); }
         .hero-content:after { bottom: -15px; left: 50%; transform: translateX(-50%); }
@@ -91,7 +68,7 @@
         @keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
         .hero-cta:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 60px rgba(255, 69, 0, 1), inset 0 3px 0 rgba(205, 133, 63, 0.7), 0 8px 0 rgba(0, 0, 0, 0.5); transform: scale(1.05) translateY(-2px); }
         
-        .features { padding: 5rem 5%; background: rgba(10, 15, 46, 0.85); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto; }
+        .features { padding: 5rem 5%; background: linear-gradient(180deg, rgba(10, 15, 46, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%230A0F2E"/><circle cx="50" cy="50" r="1" fill="%238B6914" opacity="0.3"/></svg>'); background-size: auto, 20px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto; }
         
         .feature-card { background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%); border: 5px solid #8B6914; border-radius: 5px; overflow: hidden; transition: all 0.3s; box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(139, 105, 20, 0.1), 0 8px 0 rgba(0, 0, 0, 0.3); position: relative; }
         .feature-card:before { content: '★'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: #8B6914; z-index: 10; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); animation: starRotate 4s infinite; }
@@ -104,10 +81,10 @@
         
         .feature-card h3 { padding: 1.2rem 1rem; font-family: 'Cinzel', serif; color: #3d2b1f; text-align: center; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 1px 1px 0 rgba(139, 105, 20, 0.3), 0 0 20px rgba(0, 191, 255, 0.2); background: rgba(139, 105, 20, 0.1); border-top: 2px dashed #8B6914; line-height: 1.4; }
         
-        .video-section { padding: 5rem 5%; background: rgba(26, 31, 58, 0.85); position: relative; }
+        .video-section { padding: 5rem 5%; background: linear-gradient(180deg, rgba(26, 31, 58, 0.95) 0%, rgba(10, 15, 46, 0.95) 100%); position: relative; }
         .video-section:before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: repeating-linear-gradient(90deg, #8B6914 0px, #8B6914 20px, #CD853F 20px, #CD853F 40px); box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); }
         
-        .section-header { text-align: center; margin-bottom: 4rem; padding: 2rem; background: rgba(40, 28, 20, 0.8); border: 4px solid #8B6914; border-radius: 10px; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 4rem; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.3); }
+        .section-header { text-align: center; margin-bottom: 4rem; padding: 2rem; background: rgba(40, 28, 20, 0.7); border: 4px solid #8B6914; border-radius: 10px; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 4rem; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.3); }
         .section-header h2 { font-family: 'Rye', serif; font-size: 3.2rem; color: #FFD700; margin-bottom: 0; text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 191, 255, 0.8); letter-spacing: 4px; text-transform: uppercase; }
         
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto; }
@@ -119,14 +96,53 @@
         .video-card:hover { transform: translateY(-12px) rotate(-1deg); box-shadow: 0 0 50px rgba(0, 191, 255, 0.9), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 15px 0 rgba(0, 0, 0, 0.4); }
         .video-card iframe { width: 100%; height: 240px; border: none; border-bottom: 3px solid #8B6914; }
         
-        .operator-section { padding: 5rem 5%; background: rgba(10, 15, 46, 0.85); position: relative; }
+        .operator-section { padding: 5rem 5%; background: linear-gradient(180deg, rgba(10, 15, 46, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%); position: relative; }
         .operator-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.12; top: 0; left: 0; filter: sepia(0.4); }
-        .operator-container { position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto; padding: 3rem; background: rgba(40, 28, 20, 0.9); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4); }
+        .operator-container { position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto; padding: 3rem; background: rgba(40, 28, 20, 0.8); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4); }
         .operator-container h2 { font-family: 'Rye', serif; font-size: 2.8rem; color: #FFD700; margin-bottom: 1.5rem; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 191, 255, 0.6); }
         .operator-container p { font-family: 'IM Fell English', serif; font-size: 1.4rem; color: #F5DEB3; margin-bottom: 3rem; font-style: italic; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.5); border-bottom: 2px solid rgba(139, 105, 20, 0.5); padding: 1.5rem 0; }
         
-        /* FOOTER */
-        footer { padding: 3rem 5%; background: rgba(61, 43, 31, 0.95); border-top: 5px solid #8B6914; text-align: center; box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 -10px 30px rgba(0, 191, 255, 0.3); }
+        /* FOOTER WITH YOUR BACKGROUND IMAGE */
+        footer { 
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+        
+        /* YOUR DIAMOND MINING TOWN BACKGROUND IMAGE */
+        .footer-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/xxifKEi.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        /* Dark overlay for text readability */
+        .footer-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(61, 43, 31, 0.75) 0%, rgba(40, 28, 20, 0.85) 100%);
+            z-index: 1;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 5%;
+            border-top: 5px solid #8B6914;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 -10px 30px rgba(0, 191, 255, 0.3);
+        }
         
         .footer-logo-social-container {
             display: flex;
@@ -200,7 +216,7 @@
         
         footer a:hover { color: #00BFFF; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 1); border-bottom: 2px solid #00BFFF; transform: translateY(-2px); }
         
-        footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; }
+        footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; text-align: center; }
         
         /* Mobile Responsive */
         @media (max-width: 768px) { 
@@ -281,28 +297,34 @@
     </section>
 
     <footer>
-        <div class="footer-logo-social-container">
-            <!-- X/Twitter Icon -->
-            <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
-            </a>
-            
-            <!-- DIAMONDS Logo -->
-            <div class="logo-container-footer">
-                <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
+        <!-- YOUR DIAMOND MINING TOWN BACKGROUND IMAGE -->
+        <div class="footer-background"></div>
+        
+        <!-- FOOTER CONTENT -->
+        <div class="footer-content">
+            <div class="footer-logo-social-container">
+                <!-- X/Twitter Icon -->
+                <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
+                </a>
+                
+                <!-- DIAMONDS Logo -->
+                <div class="logo-container-footer">
+                    <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
+                </div>
+                
+                <!-- Telegram Icon -->
+                <a href="https://t.me/blazedefi/52421" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z'/%3E%3C/svg%3E" alt="Telegram">
+                </a>
             </div>
             
-            <!-- Telegram Icon -->
-            <a href="https://t.me/blazedefi/52421" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z'/%3E%3C/svg%3E" alt="Telegram">
-            </a>
+            <div>
+                <a href="http://diamonds1111.win" target="_blank">Protocol</a>
+                <a href="https://ethereum.org" target="_blank">Ethereum</a>
+            </div>
+            <p>© 2026 $DIAMONDS Protocol. Built on Ethereum.</p>
         </div>
-        
-        <div>
-            <a href="http://diamonds1111.win" target="_blank">Protocol</a>
-            <a href="https://ethereum.org" target="_blank">Ethereum</a>
-        </div>
-        <p>© 2026 $DIAMONDS Protocol. Built on Ethereum.</p>
     </footer>
 
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
