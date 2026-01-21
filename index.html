@@ -26,14 +26,35 @@
         @keyframes twinkle { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.9); } }
         .cta-link:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 40px rgba(0, 191, 255, 0.8), inset 0 2px 0 rgba(205, 133, 63, 0.7), 0 6px 0 rgba(0, 0, 0, 0.4); transform: translateY(-3px); }
         
-        /* HERO SECTION - Fixed background */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 5% 50px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(20, 15, 10, 0.95) 0%, rgba(10, 15, 46, 0.9) 50%, rgba(20, 15, 10, 0.95) 100%), radial-gradient(circle at 50% 50%, rgba(139, 105, 20, 0.15) 0%, transparent 70%); }
+        /* HERO SECTION - WITH STATIC BACKDROP */
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 120px 5% 50px; 
+            position: relative; 
+            overflow: hidden; 
+            background-image: url('https://i.imgur.com/dO0gnBy.jpg'); /* Note: If this doesn't work, try .png or get direct image link */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
         
-        /* Dynamic background pattern for hero */
-        .hero:before { content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 191, 255, 0.03) 35px, rgba(0, 191, 255, 0.03) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 215, 0, 0.02) 35px, rgba(255, 215, 0, 0.02) 70px); z-index: 0; opacity: 0.6; }
-        
-        /* Remove broken background image */
-        .hero-bg { display: none; }
+        /* Dark overlay to make text readable */
+        .hero:before { 
+            content: ''; 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            top: 0; 
+            left: 0; 
+            background: rgba(10, 15, 46, 0.75);
+            z-index: 0; 
+        }
         
         .hero-content { position: relative; z-index: 2; padding: 3rem; background: rgba(40, 28, 20, 0.85); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 40px rgba(0, 191, 255, 0.5), inset 0 0 60px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.7); max-width: 1000px; }
         .hero-content:before, .hero-content:after { content: '◆'; position: absolute; font-size: 2rem; color: #00BFFF; text-shadow: 0 0 15px rgba(0, 191, 255, 1); animation: pulse 3s infinite; }
@@ -95,14 +116,73 @@
         .operator-container h2 { font-family: 'Rye', serif; font-size: 2.8rem; color: #FFD700; margin-bottom: 1.5rem; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 191, 255, 0.6); }
         .operator-container p { font-family: 'IM Fell English', serif; font-size: 1.4rem; color: #F5DEB3; margin-bottom: 3rem; font-style: italic; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.5); border-bottom: 2px solid rgba(139, 105, 20, 0.5); padding: 1.5rem 0; }
         
-        /* FOOTER - Enhanced with bigger logo */
+        /* FOOTER - Enhanced with social icons */
         footer { padding: 3rem 5%; background: linear-gradient(180deg, #3d2b1f 0%, #2a1f17 100%); border-top: 5px solid #8B6914; text-align: center; box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 -10px 30px rgba(0, 191, 255, 0.3); }
         
-        footer .logo-container-footer { display: inline-block; padding: 1.5rem; background: rgba(40, 28, 20, 0.7); border: 4px solid #8B6914; border-radius: 15px; box-shadow: 0 0 30px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.3); margin-bottom: 2rem; }
+        .footer-logo-social-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
         
-        footer .logo-img { height: 120px; /* INCREASED from 55px */ filter: drop-shadow(0 0 25px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); animation: footerLogoGlow 4s infinite alternate; }
+        footer .logo-container-footer { 
+            display: inline-block; 
+            padding: 1.5rem; 
+            background: rgba(40, 28, 20, 0.7); 
+            border: 4px solid #8B6914; 
+            border-radius: 15px; 
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.3); 
+        }
         
-        @keyframes footerLogoGlow { from { filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.7)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); transform: scale(1); } to { filter: drop-shadow(0 0 35px rgba(0, 191, 255, 1)) drop-shadow(0 0 20px rgba(255, 215, 0, 1)); transform: scale(1.05); } }
+        footer .logo-img { 
+            height: 120px;
+            filter: drop-shadow(0 0 25px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); 
+            animation: footerLogoGlow 4s infinite alternate; 
+        }
+        
+        @keyframes footerLogoGlow { 
+            from { 
+                filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.7)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); 
+                transform: scale(1); 
+            } 
+            to { 
+                filter: drop-shadow(0 0 35px rgba(0, 191, 255, 1)) drop-shadow(0 0 20px rgba(255, 215, 0, 1)); 
+                transform: scale(1.05); 
+            } 
+        }
+        
+        /* Social Media Icons */
+        .social-icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: rgba(40, 28, 20, 0.8);
+            border: 3px solid #8B6914;
+            border-radius: 50%;
+            padding: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-icon img {
+            width: 100%;
+            height: 100%;
+            filter: brightness(0) saturate(100%) invert(79%) sepia(52%) saturate(527%) hue-rotate(359deg) brightness(104%) contrast(101%);
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.9), inset 0 0 20px rgba(139, 105, 20, 0.3);
+            border-color: #00BFFF;
+        }
+        
+        .social-icon:hover img {
+            filter: brightness(0) saturate(100%) invert(69%) sepia(86%) saturate(2591%) hue-rotate(167deg) brightness(103%) contrast(101%);
+            transform: rotate(360deg);
+        }
         
         footer a { color: #FFD700; text-decoration: none; margin: 0 2rem; font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5); border-bottom: 2px solid transparent; position: relative; }
         
@@ -125,7 +205,9 @@
             .section-header h2 { font-size: 2.2rem; } 
             .video-grid, .features { grid-template-columns: 1fr; gap: 2rem; } 
             .operator-container h2 { font-size: 2.2rem; }
-            footer .logo-img { height: 80px; } /* Bigger on mobile too */
+            footer .logo-img { height: 80px; }
+            .footer-logo-social-container { flex-direction: column; gap: 2rem; }
+            .social-icon { width: 50px; height: 50px; padding: 10px; }
         }
     </style>
 </head>
@@ -190,9 +272,23 @@
     </section>
 
     <footer>
-        <div class="logo-container-footer">
-            <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
+        <div class="footer-logo-social-container">
+            <!-- X/Twitter Icon -->
+            <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
+            </a>
+            
+            <!-- DIAMONDS Logo -->
+            <div class="logo-container-footer">
+                <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
+            </div>
+            
+            <!-- Telegram Icon -->
+            <a href="https://t.me/blazedefi/52421" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z'/%3E%3C/svg%3E" alt="Telegram">
+            </a>
         </div>
+        
         <div>
             <a href="http://diamonds1111.win" target="_blank">Protocol</a>
             <a href="https://ethereum.org" target="_blank">Ethereum</a>
