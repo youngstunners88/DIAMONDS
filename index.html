@@ -25,13 +25,12 @@
             object-fit: cover;
         }
         
-        /* MAIN BODY STYLES - Removed static background */
+        /* MAIN BODY STYLES - Removed static background image */
         body { 
             font-family: 'Crimson Text', serif; 
             color: #f5f5dc; 
             overflow-x: hidden; 
             position: relative;
-            scroll-behavior: smooth;
         }
         
         /* Semi-transparent dark overlay for readability */
@@ -42,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 15, 46, 0.6);
+            background: rgba(10, 15, 46, 0.5);
             z-index: -1;
             pointer-events: none;
         }
@@ -95,11 +94,10 @@
         
         .hero h2 { font-family: 'IM Fell English', serif; font-size: 1.5rem; margin-bottom: 3rem; color: #F5DEB3; font-weight: 400; font-style: italic; line-height: 1.8; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 191, 255, 0.3); border-top: 2px solid rgba(139, 105, 20, 0.5); border-bottom: 2px solid rgba(139, 105, 20, 0.5); padding: 1.5rem 0; }
         
-        .hero-cta { background: linear-gradient(180deg, #8B6914 0%, #654321 50%, #3d2b1f 100%); color: #FFD700; padding: 1.5rem 4rem; border: 4px solid #CD853F; border-radius: 8px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 0 30px rgba(255, 69, 0, 0.6), inset 0 3px 0 rgba(205, 133, 63, 0.5), 0 6px 0 rgba(0, 0, 0, 0.4); display: inline-block; position: relative; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5); animation: heartbeat 2s infinite; }
+        .hero-cta { background: linear-gradient(180deg, #8B6914 0%, #654321 50%, #3d2b1f 100%); color: #FFD700; padding: 1.5rem 4rem; border: 4px solid #CD853F; border-radius: 8px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 0 30px rgba(255, 69, 0, 0.6), inset 0 3px 0 rgba(205, 133, 63, 0.5), 0 6px 0 rgba(0, 0, 0, 0.4); display: inline-block; position: relative; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5); }
         .hero-cta:before { content: '🔥'; position: absolute; left: 15px; font-size: 1.5rem; animation: flicker 2s infinite; }
         .hero-cta:after { content: '🔥'; position: absolute; right: 15px; font-size: 1.5rem; animation: flicker 2s infinite reverse; }
         @keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         .hero-cta:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 60px rgba(255, 69, 0, 1), inset 0 3px 0 rgba(205, 133, 63, 0.7), 0 8px 0 rgba(0, 0, 0, 0.5); transform: scale(1.05) translateY(-2px); }
         
         /* FEATURES */
@@ -113,20 +111,12 @@
             margin: 0 auto; 
         }
         
-        .feature-card { 
-            background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%); 
-            border: 5px solid #8B6914; 
-            border-radius: 5px; 
-            overflow: hidden; 
-            transition: all 0.3s; 
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(139, 105, 20, 0.1), 0 8px 0 rgba(0, 0, 0, 0.3); 
-            position: relative;
-        }
+        .feature-card { background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%); border: 5px solid #8B6914; border-radius: 5px; overflow: hidden; transition: all 0.3s; box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(139, 105, 20, 0.1), 0 8px 0 rgba(0, 0, 0, 0.3); position: relative; }
         .feature-card:before { content: '★'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: #8B6914; z-index: 10; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); animation: starRotate 4s infinite; }
         .feature-card:after { content: '★'; position: absolute; top: 10px; right: 10px; font-size: 2rem; color: #8B6914; z-index: 10; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); animation: starRotate 4s infinite 2s; }
         @keyframes starRotate { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
         
-        .feature-card:hover { transform: translateY(-10px) rotate(-1deg) scale(1.02); box-shadow: 0 0 50px rgba(0, 191, 255, 0.8), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 12px 0 rgba(0, 0, 0, 0.4); }
+        .feature-card:hover { transform: translateY(-10px) rotate(-1deg); box-shadow: 0 0 50px rgba(0, 191, 255, 0.8), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 12px 0 rgba(0, 0, 0, 0.4); }
         .feature-card img { width: 100%; height: 280px; object-fit: cover; border-bottom: 3px solid #8B6914; filter: sepia(0.2); transition: all 0.3s; }
         .feature-card:hover img { filter: sepia(0) brightness(1.1); transform: scale(1.05); }
         
@@ -149,7 +139,7 @@
         .video-card:hover:before { opacity: 1; animation: playPulse 1s infinite; }
         @keyframes playPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
         
-        .video-card:hover { transform: translateY(-12px) rotate(-1deg) scale(1.02); box-shadow: 0 0 50px rgba(0, 191, 255, 0.9), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 15px 0 rgba(0, 0, 0, 0.4); }
+        .video-card:hover { transform: translateY(-12px) rotate(-1deg); box-shadow: 0 0 50px rgba(0, 191, 255, 0.9), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 15px 0 rgba(0, 0, 0, 0.4); }
         .video-card iframe { width: 100%; height: 240px; border: none; border-bottom: 3px solid #8B6914; }
         
         /* OPERATOR SECTION */
@@ -245,24 +235,6 @@
         
         footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; }
         
-        /* Typewriter effect */
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #FFD700;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #FFD700; }
-        }
-        
         /* Mobile Responsive */
         @media (max-width: 768px) { 
             header { flex-direction: column; gap: 1rem; padding: 1rem 3%; } 
@@ -303,8 +275,8 @@
     <section class="hero">
         <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <h1 id="heroTitle">Welcome to the $DIAMONDS Protocol Video Library</h1>
-            <h2 id="heroSubtitle">Discover staking, mining, and Ethereum-powered diamond rewards.<br>Powered by blockchain brilliance.</h2>
+            <h1>Welcome to the $DIAMONDS Protocol Video Library</h1>
+            <h2>Discover staking, mining, and Ethereum-powered diamond rewards.<br>Powered by blockchain brilliance.</h2>
             <a href="http://diamonds1111.win" class="hero-cta" target="_blank">Explore diamonds1111.win</a>
         </div>
     </section>
@@ -377,7 +349,6 @@
     <script>
         // === VIDEO BACKGROUND CONTROL ===
         const video = document.getElementById('video-background');
-        let videoPlaying = true;
         
         // Configure video for ping-pong loop (forward then reverse)
         if (video) {
@@ -413,215 +384,21 @@
             wagonImg: 'https://i.imgur.com/7Sqz2Eu.jpg',
             footerLogo: 'https://i.imgur.com/tt4VF6t.png'
         };
-        
         Object.keys(images).forEach(id => {
             const element = document.getElementById(id);
             if (element) element.src = images[id];
         });
 
-        // === ENHANCED PARTICLE SYSTEM ===
+        // === PARTICLE SYSTEM ===
         const particlesContainer = document.getElementById('particles');
-        const particleCount = window.innerWidth > 768 ? 50 : 25;
-        
-        function createParticle() {
+        for (let i = 0; i < 50; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.animationDelay = Math.random() * 8 + 's';
             particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
-            
-            // Random colors: blue, gold, or white
-            const colors = ['#00BFFF', '#FFD700', '#FFFFFF'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.background = color;
-            particle.style.boxShadow = `0 0 15px ${color}`;
-            
-            // Random sizes
-            const size = Math.random() * 4 + 3;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            
             particlesContainer.appendChild(particle);
-            
-            // Remove particle after animation
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, 15000);
         }
-        
-        // Create initial particles
-        for (let i = 0; i < particleCount; i++) {
-            setTimeout(() => createParticle(), i * 200);
-        }
-        
-        // Continuously create new particles
-        setInterval(createParticle, 800);
-
-        // === PARALLAX MOUSE EFFECT ===
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-        
-        function updateParallax() {
-            const parallaxElements = document.querySelectorAll('.hero-content, .feature-card, .video-card, .operator-container');
-            parallaxElements.forEach((el, index) => {
-                const speed = (index + 1) * 0.5;
-                const x = mouseX * speed * 5;
-                const y = mouseY * speed * 5;
-                el.style.transform += ` translate(${x}px, ${y}px)`;
-            });
-            requestAnimationFrame(updateParallax);
-        }
-        updateParallax();
-
-        // === TYPEWRITER EFFECT FOR HERO TITLE ===
-        const heroTitle = document.getElementById('heroTitle');
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.classList.add('typewriter');
-        
-        let charIndex = 0;
-        function typeWriter() {
-            if (charIndex < originalText.length) {
-                heroTitle.textContent += originalText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-        
-        // Start typewriter when page loads
-        window.addEventListener('load', () => {
-            setTimeout(typeWriter, 500);
-        });
-
-        // === SCROLL-BASED DYNAMIC LIGHTING ===
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const scrollSpeed = Math.abs(scrollY - lastScrollY);
-            lastScrollY = scrollY;
-            
-            // Increase glow intensity when scrolling fast
-            const intensity = Math.min(scrollSpeed / 10, 1);
-            document.body.style.setProperty('--scroll-glow', intensity);
-            
-            // Add dynamic glow to header
-            const header = document.querySelector('header');
-            if (scrollSpeed > 5) {
-                header.style.boxShadow = `0 0 50px rgba(0, 191, 255, ${0.4 + intensity * 0.6}), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3)`;
-            }
-        });
-
-        // === VIDEO CARD HOVER ENHANCEMENT ===
-        document.querySelectorAll('.video-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.cssText = `
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 0;
-                    height: 0;
-                    border-radius: 50%;
-                    background: radial-gradient(circle, rgba(0,191,255,0.4) 0%, transparent 70%);
-                    transform: translate(-50%, -50%);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                this.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-        
-        // Add ripple animation to stylesheet
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    width: 300px;
-                    height: 300px;
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // === PERFORMANCE OPTIMIZATION ===
-        // Debounce scroll events
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                // Pause video when page is not visible
-                if (document.hidden && video) {
-                    video.pause();
-                } else if (video && videoPlaying) {
-                    video.play();
-                }
-            }, 100);
-        });
-
-        // === MOBILE TOUCH FEEDBACK ===
-        if ('ontouchstart' in window) {
-            document.querySelectorAll('.cta-link, .hero-cta, .social-icon').forEach(button => {
-                button.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-                button.addEventListener('touchend', function() {
-                    this.style.transform = '';
-                });
-            });
-        }
-
-        // === VIDEO SECTION ENHANCEMENT ===
-        // Add click-to-play functionality for YouTube videos
-        document.querySelectorAll('.video-card').forEach((card, index) => {
-            card.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'IFRAME') {
-                    const iframe = this.querySelector('iframe');
-                    const currentSrc = iframe.src;
-                    // Force play by adding autoplay parameter
-                    if (!currentSrc.includes('autoplay=1')) {
-                        iframe.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'autoplay=1';
-                    }
-                }
-            });
-        });
-
-        // === AMBIENT SOUND TOGGLE (Easter Egg) ===
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let backgroundMusic = false;
-        
-        // Press 'M' to toggle ambient sound
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'm' || e.key === 'M') {
-                backgroundMusic = !backgroundMusic;
-                if (backgroundMusic) {
-                    // Create ambient tone
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    oscillator.frequency.value = 220; // A3
-                    oscillator.type = 'sine';
-                    gainNode.gain.value = 0.02;
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    oscillator.start();
-                    // Fade out after 5 seconds
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 5);
-                    oscillator.stop(audioContext.currentTime + 5);
-                }
-            }
-        });
     </script>
 </body>
 </html>
