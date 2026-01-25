@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Website with Ambient SoundCloud Audio</title>
+  <title>Responsive Site with Music</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -16,16 +16,15 @@
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, #0b0b12, #14142a);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: #ffffff;
     }
 
+    /* ===== LAYOUT ===== */
     .container {
-      text-align: center;
-      max-width: 900px;
+      max-width: 1100px;
+      margin: 0 auto;
       padding: 4rem 2rem;
+      text-align: center;
     }
 
     h1 {
@@ -36,31 +35,56 @@
 
     p {
       font-size: 1.2rem;
-      opacity: 0.8;
+      opacity: 0.85;
       line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
+    /* ===== MUSIC BUTTON ===== */
     .audio-control {
       position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 56px;
-      height: 56px;
+      bottom: 20px;
+      left: 20px; /* FORCE bottom-left */
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.3rem;
       cursor: pointer;
-      font-size: 1.4rem;
-      transition: background 0.2s ease, transform 0.2s ease;
       z-index: 9999;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .audio-control:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
+    .audio-control:active {
+      transform: scale(0.95);
+    }
+
+    /* ===== MOBILE FIXES ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1.05rem;
+      }
+
+      .audio-control {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        bottom: 16px;
+        left: 16px; /* mobile bottom-left */
+      }
     }
   </style>
 </head>
@@ -68,10 +92,10 @@
 <body>
 
   <div class="container">
-    <h1>Welcome</h1>
+    <h1>Your Site</h1>
     <p>
-      Ambient background audio starts on your first interaction.
-      Clean. Cinematic. Browser-safe.
+      Desktop stays cinematic.  
+      Mobile is restored, clean, readable, and touch-safe — with music included.
     </p>
   </div>
 
@@ -83,7 +107,7 @@
     style="position:fixed; left:-9999px; width:1px; height:1px;"
   ></iframe>
 
-  <!-- Audio Toggle -->
+  <!-- Music Toggle -->
   <div id="musicToggle" class="audio-control">
     <span id="musicIcon">🔇</span>
   </div>
@@ -98,19 +122,21 @@
     const icon = document.getElementById('musicIcon');
 
     let isPlaying = false;
+    let initialized = false;
 
-    // Start music on first user interaction
-    function initMusic() {
+    function startMusic() {
+      if (initialized) return;
       widget.play();
       widget.setVolume(60);
-      isPlaying = true;
       icon.textContent = '🔊';
-      document.removeEventListener('click', initMusic);
+      isPlaying = true;
+      initialized = true;
     }
 
-    document.addEventListener('click', initMusic);
+    // Required for mobile autoplay rules
+    document.addEventListener('click', startMusic, { once: true });
+    document.addEventListener('touchstart', startMusic, { once: true });
 
-    // Toggle play / pause
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isPlaying) {
@@ -123,7 +149,6 @@
       isPlaying = !isPlaying;
     });
 
-    // Loop track forever
     widget.bind(SC.Widget.Events.FINISH, () => {
       widget.seekTo(0);
       widget.play();
