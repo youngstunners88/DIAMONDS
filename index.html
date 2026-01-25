@@ -25,13 +25,56 @@
             object-fit: cover;
         }
         
-        /* HIDDEN SOUNDCLOUD PLAYER */
-        #soundcloud-player {
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5%;
+            border: 4px solid #8B6914;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 191, 255, 0.8);
+            animation: zoomIn 0.3s;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+        
+        .close {
             position: absolute;
-            width: 0;
-            height: 0;
-            visibility: hidden;
-            left: -9999px;
+            top: 20px;
+            right: 40px;
+            color: #FFD700;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 1);
+            transition: all 0.3s;
+        }
+        
+        .close:hover {
+            color: #00BFFF;
+            transform: scale(1.2);
         }
         
         /* MAIN BODY STYLES */
@@ -196,6 +239,14 @@
             border: 4px solid #8B6914; 
             border-radius: 15px; 
             box-shadow: 0 0 30px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.3); 
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        footer .logo-container-footer:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 191, 255, 0.9), inset 0 0 30px rgba(139, 105, 20, 0.3);
+            border-color: #00BFFF;
         }
         
         footer .logo-img { 
@@ -252,6 +303,45 @@
         footer a:hover { color: #00BFFF; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 1); border-bottom: 2px solid #00BFFF; transform: translateY(-2px); }
         footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; }
         
+        /* Audio Control Button */
+        .audio-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 3000;
+            background: linear-gradient(180deg, #8B6914 0%, #654321 100%);
+            border: 3px solid #CD853F;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+            transition: all 0.3s;
+        }
+        
+        .audio-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 191, 255, 1);
+        }
+        
+        .audio-control.playing {
+            animation: audioPulse 2s infinite;
+        }
+        
+        @keyframes audioPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 191, 255, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(0, 191, 255, 1), 0 0 70px rgba(255, 215, 0, 0.5); }
+        }
+        
+        .audio-icon {
+            font-size: 28px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+        }
+        
         /* Original Mobile CSS - Reverted */
         @media (max-width: 768px) { 
             header { flex-direction: column; gap: 1rem; padding: 1rem 3%; } 
@@ -269,11 +359,13 @@
             .social-icon { width: 50px; height: 50px; padding: 10px; }
             #video-background { display: none; }
             body { background: linear-gradient(135deg, #0a0f2e, #1a1f3a); }
+            .audio-control { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+            .audio-icon { font-size: 22px; }
         }
     </style>
 </head>
 <body>
-    <!-- VIDEO BACKGROUND - UPDATED -->
+    <!-- VIDEO BACKGROUND - WITH AUDIO -->
     <video id="video-background" autoplay muted loop playsinline>
         <source src="https://i.imgur.com/l5pGUjk.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -286,6 +378,11 @@
             height="0" 
             style="position: absolute; left: -9999px;">
     </iframe>
+
+    <!-- AUDIO CONTROL BUTTON -->
+    <div class="audio-control" id="audioControl" title="Toggle Audio">
+        <span class="audio-icon" id="audioIcon">🔇</span>
+    </div>
 
     <!-- IMAGE MODAL -->
     <div id="imageModal" class="modal">
@@ -321,7 +418,7 @@
             <img src="" alt="DIAMONDS Scroll" id="scrollImg">
             <h3>Ancient Diamond Wisdom</h3>
         </div>
-        <div class="feature-card" data-link="https://i.imgur.com/T4T3LoM.png" data-type="modal">
+        <div class="feature-card" data-link="https://diamonds1111.win/?page=vault" data-type="external">
             <img src="" alt="Diamond Wagon" id="wagonImg">
             <h3>ETH Rewards Transport</h3>
         </div>
@@ -357,7 +454,7 @@
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
             </a>
             
-            <div class="logo-container-footer">
+            <div class="logo-container-footer" id="footerLogoContainer">
                 <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
             </div>
             
@@ -375,8 +472,62 @@
 
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
     <script>
+        // Initialize audio state
+        let isAudioPlaying = false;
+        let videoUnmuted = false;
+        
         // === VIDEO BACKGROUND CONTROL ===
         const video = document.getElementById('video-background');
+        const audioControl = document.getElementById('audioControl');
+        const audioIcon = document.getElementById('audioIcon');
+        
+        // Try to enable audio on user interaction
+        function enableAudio() {
+            if (!videoUnmuted) {
+                video.muted = false;
+                video.volume = 0.5;
+                videoUnmuted = true;
+            }
+            
+            // Also try to play SoundCloud if not already playing
+            const soundcloudFrame = document.getElementById('soundcloud-player');
+            if (soundcloudFrame && !isAudioPlaying) {
+                // Reload with autoplay to ensure it starts
+                soundcloudFrame.src = soundcloudFrame.src;
+                isAudioPlaying = true;
+                updateAudioButton();
+            }
+        }
+        
+        // Update audio button appearance
+        function updateAudioButton() {
+            if (isAudioPlaying || !video.muted) {
+                audioControl.classList.add('playing');
+                audioIcon.textContent = '🔊';
+            } else {
+                audioControl.classList.remove('playing');
+                audioIcon.textContent = '🔇';
+            }
+        }
+        
+        // Audio control click handler
+        audioControl.addEventListener('click', () => {
+            if (!videoUnmuted) {
+                enableAudio();
+                isAudioPlaying = true;
+            } else {
+                // Toggle video mute
+                video.muted = !video.muted;
+                isAudioPlaying = !video.muted;
+            }
+            updateAudioButton();
+        });
+        
+        // Enable audio on first user interaction anywhere on page
+        document.addEventListener('click', function initAudio() {
+            enableAudio();
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
         
         if (video) {
             video.addEventListener('ended', () => {
@@ -390,7 +541,6 @@
                 }
             });
             
-            video.muted = true;
             video.play().catch(e => {
                 console.log('Autoplay prevented:', e);
             });
@@ -398,11 +548,11 @@
 
         // === IMAGE LOADING ===
         const images = {
-            mainLogo: 'https://i.imgur.com/FS8Nynp.png', // Updated logo
+            mainLogo: 'https://i.imgur.com/FS8Nynp.png',
             certImg: 'https://i.imgur.com/pxHQgrZ.jpg',
             scrollImg: 'https://i.imgur.com/5Y2VAto.jpg',
             wagonImg: 'https://i.imgur.com/7Sqz2Eu.jpg',
-            footerLogo: 'https://i.imgur.com/FS8Nynp.png' // Updated logo
+            footerLogo: 'https://i.imgur.com/FS8Nynp.png'
         };
         Object.keys(images).forEach(id => {
             const element = document.getElementById(id);
@@ -449,6 +599,11 @@
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
+        });
+
+        // === FOOTER LOGO CLICKABLE ===
+        document.getElementById('footerLogoContainer').addEventListener('click', () => {
+            window.open('https://x.com/blaze3win/status/1988185023925940493?s=46', '_blank', 'noopener,noreferrer');
         });
     </script>
 </body>
