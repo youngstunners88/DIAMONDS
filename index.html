@@ -25,6 +25,15 @@
             object-fit: cover;
         }
         
+        /* HIDDEN SOUNDCLOUD PLAYER */
+        #soundcloud-player {
+            position: absolute;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            left: -9999px;
+        }
+        
         /* MAIN BODY STYLES */
         body { 
             font-family: 'Crimson Text', serif; 
@@ -44,83 +53,6 @@
             background: rgba(10, 15, 46, 0.5);
             z-index: -1;
             pointer-events: none;
-        }
-        
-        /* MUSIC TOGGLE BUTTON */
-        #musicToggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(139, 105, 20, 0.9);
-            border: 2px solid #00BFFF;
-            border-radius: 50%;
-            color: #FFD700;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #musicToggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
-        }
-        
-        #musicToggle.playing {
-            animation: pulse 2s infinite;
-        }
-        
-        /* MODAL FOR IMAGE */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-            border: 3px solid #8B6914;
-            border-radius: 10px;
-            box-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
-        }
-        
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #FFD700;
-            font-size: 3rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
-            transition: all 0.3s;
-        }
-        
-        .close:hover {
-            color: #00BFFF;
-            transform: scale(1.2);
         }
         
         header { 
@@ -445,19 +377,10 @@
             #video-background { display: none; }
             body { background: linear-gradient(135deg, #0a0f2e, #1a1f3a); }
             
-            /* Improve touch targets */
+            /* Simplified interactions for mobile */
             .feature-card, .video-card, .social-icon {
                 cursor: pointer;
                 -webkit-tap-highlight-color: rgba(0, 191, 255, 0.3);
-            }
-            
-            /* Better spacing for music toggle on mobile */
-            #musicToggle {
-                bottom: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -469,16 +392,13 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- BACKGROUND MUSIC -->
-    <audio id="bgMusic" loop>
-        <!-- Replace the src URL with your GitHub-hosted audio file -->
-        <source src="YOUR_GITHUB_AUDIO_URL_HERE.mp3" type="audio/mpeg">
-        <source src="YOUR_GITHUB_AUDIO_URL_HERE.ogg" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio>
-    
-    <!-- MUSIC TOGGLE BUTTON -->
-    <button id="musicToggle" title="Toggle Music">🎵</button>
+    <!-- SOUNDCLOUD AUDIO PLAYER (Hidden) -->
+    <iframe id="soundcloud-player" 
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2253853805&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false" 
+            width="0" 
+            height="0" 
+            style="position: absolute; left: -9999px;">
+    </iframe>
 
     <!-- IMAGE MODAL -->
     <div id="imageModal" class="modal">
@@ -547,7 +467,7 @@
     <footer>
         <div class="footer-logo-social-container">
             <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt X (Twitter)">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
             </a>
             
             <div class="logo-container-footer">
@@ -584,23 +504,19 @@
             });
             
             video.muted = true;
+            // Removed fallback button - just fail silently
             video.play().catch(e => {
                 console.log('Autoplay prevented:', e);
-                const playButton = document.createElement('button');
-                playButton.textContent = '▶ Play Video';
-                playButton.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:1001;padding:10px;background:rgba(139,105,20,0.9);color:#FFD700;border:2px solid #00BFFF;border-radius:5px;cursor:pointer;';
-                playButton.onclick = () => video.play();
-                document.body.appendChild(playButton);
             });
         }
 
         // === IMAGE LOADING ===
         const images = {
-            mainLogo: 'https://i.imgur.com/tt4VF6t.png',
+            mainLogo: 'https://i.imgur.com/FS8Nynp.png', // Updated logo
             certImg: 'https://i.imgur.com/pxHQgrZ.jpg',
             scrollImg: 'https://i.imgur.com/5Y2VAto.jpg',
             wagonImg: 'https://i.imgur.com/7Sqz2Eu.jpg',
-            footerLogo: 'https://i.imgur.com/tt4VF6t.png'
+            footerLogo: 'https://i.imgur.com/FS8Nynp.png' // Updated logo
         };
         Object.keys(images).forEach(id => {
             const element = document.getElementById(id);
@@ -649,73 +565,7 @@
             }
         });
 
-        // === BACKGROUND MUSIC ===
-        const bgMusic = document.getElementById('bgMusic');
-        const musicToggle = document.getElementById('musicToggle');
-        let isPlaying = false;
-        
-        // IMPORTANT: Replace the audio source in the HTML with your GitHub URL
-        // Example: <source src="https://raw.githubusercontent.com/yourusername/repo/main/song.mp3" type="audio/mpeg">
-        
-        musicToggle.addEventListener('click', () => {
-            if (!bgMusic.src || bgMusic.src.includes('YOUR_GITHUB_AUDIO_URL_HERE')) {
-                alert('Please add your audio file URL to the audio element in the HTML.');
-                return;
-            }
-            
-            if (isPlaying) {
-                bgMusic.pause();
-                musicToggle.textContent = '🎵';
-                musicToggle.classList.remove('playing');
-                isPlaying = false;
-            } else {
-                bgMusic.play().then(() => {
-                    musicToggle.textContent = '⏸️';
-                    musicToggle.classList.add('playing');
-                    isPlaying = true;
-                }).catch(e => {
-                    console.log('Audio play failed:', e);
-                    alert('Audio autoplay blocked. Please interact with the page first, then try again.');
-                });
-            }
-        });
-        
-        // Resume music after user interaction (mobile requirement)
-        document.addEventListener('click', function initAudio() {
-            if (bgMusic.src && !bgMusic.src.includes('YOUR_GITHUB_AUDIO_URL_HERE') && !isPlaying) {
-                bgMusic.volume = 0.3; // Set initial volume
-            }
-            document.removeEventListener('click', initAudio);
-        }, { once: true });
-
-        // === MOBILE TOUCH IMPROVEMENTS ===
-        if ('ontouchstart' in window) {
-            // Add touch feedback for cards
-            document.querySelectorAll('.feature-card, .video-card, .social-icon, .cta-link, .hero-cta').forEach(el => {
-                el.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.97)';
-                    this.style.transition = 'transform 0.1s';
-                });
-                el.addEventListener('touchend', function() {
-                    this.style.transform = '';
-                    setTimeout(() => {
-                        this.style.transition = 'all 0.3s';
-                    }, 100);
-                });
-            });
-            
-            // Prevent zoom on double tap for iOS
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function (event) {
-                const now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-        }
-
-        // === PERFORMANCE: LAZY LOAD YOUTUBE VIDEOS ===
+        // === LAZY LOAD VIDEOS ===
         document.querySelectorAll('.video-card iframe').forEach(iframe => {
             iframe.setAttribute('loading', 'lazy');
         });
