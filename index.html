@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Responsive Site with Music</title>
+  <title>Working Desktop + Mobile Audio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -16,10 +16,9 @@
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, #0b0b12, #14142a);
-      color: #ffffff;
+      color: #fff;
     }
 
-    /* ===== LAYOUT ===== */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -30,26 +29,21 @@
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      letter-spacing: -0.02em;
     }
 
     p {
       font-size: 1.2rem;
       opacity: 0.85;
-      line-height: 1.6;
-      max-width: 700px;
-      margin: 0 auto;
     }
 
-    /* ===== MUSIC BUTTON ===== */
     .audio-control {
       position: fixed;
       bottom: 20px;
-      left: 20px; /* FORCE bottom-left */
+      left: 20px;
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
@@ -57,33 +51,15 @@
       font-size: 1.3rem;
       cursor: pointer;
       z-index: 9999;
-      transition: transform 0.2s ease, background 0.2s ease;
+      user-select: none;
     }
 
-    .audio-control:active {
-      transform: scale(0.95);
-    }
-
-    /* ===== MOBILE FIXES ===== */
     @media (max-width: 768px) {
-      .container {
-        padding: 3rem 1.5rem;
-      }
-
       h1 {
         font-size: 2.2rem;
       }
-
       p {
         font-size: 1.05rem;
-      }
-
-      .audio-control {
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-        bottom: 16px;
-        left: 16px; /* mobile bottom-left */
       }
     }
   </style>
@@ -94,64 +70,72 @@
   <div class="container">
     <h1>Your Site</h1>
     <p>
-      Desktop stays cinematic.  
-      Mobile is restored, clean, readable, and touch-safe — with music included.
+      Desktop and mobile restored.  
+      Audio starts after interaction, loops forever.
     </p>
   </div>
 
-  <!-- Hidden SoundCloud Player -->
+  <!-- SoundCloud iframe -->
   <iframe
-    id="soundcloud-player"
+    id="sc-player"
     allow="autoplay"
     src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2253853805&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
     style="position:fixed; left:-9999px; width:1px; height:1px;"
   ></iframe>
 
-  <!-- Music Toggle -->
-  <div id="musicToggle" class="audio-control">
-    <span id="musicIcon">🔇</span>
-  </div>
+  <!-- Audio button -->
+  <div id="audioBtn" class="audio-control">🔇</div>
 
   <!-- SoundCloud API -->
   <script src="https://w.soundcloud.com/player/api.js"></script>
 
   <script>
-    const iframe = document.getElementById('soundcloud-player');
-    const widget = SC.Widget(iframe);
-    const toggle = document.getElementById('musicToggle');
-    const icon = document.getElementById('musicIcon');
+    const iframe = document.getElementById('sc-player');
+    const button = document.getElementById('audioBtn');
 
+    let widget;
     let isPlaying = false;
-    let initialized = false;
+    let userInteracted = false;
 
-    function startMusic() {
-      if (initialized) return;
+    // Initialize widget ONLY after iframe loads
+    iframe.onload = () => {
+      widget = SC.Widget(iframe);
+
+      widget.bind(SC.Widget.Events.READY, () => {
+        console.log('SoundCloud ready');
+      });
+
+      widget.bind(SC.Widget.Events.FINISH, () => {
+        widget.seekTo(0);
+        widget.play();
+      });
+    };
+
+    function handleUserInteraction() {
+      if (!widget || userInteracted) return;
+
       widget.play();
       widget.setVolume(60);
-      icon.textContent = '🔊';
       isPlaying = true;
-      initialized = true;
+      userInteracted = true;
+      button.textContent = '🔊';
     }
 
-    // Required for mobile autoplay rules
-    document.addEventListener('click', startMusic, { once: true });
-    document.addEventListener('touchstart', startMusic, { once: true });
+    // ONE interaction handler (desktop + mobile)
+    document.addEventListener('pointerdown', handleUserInteraction, { once: true });
 
-    toggle.addEventListener('click', (e) => {
+    button.addEventListener('click', (e) => {
       e.stopPropagation();
+      if (!widget) return;
+
       if (isPlaying) {
         widget.pause();
-        icon.textContent = '🔇';
+        button.textContent = '🔇';
       } else {
         widget.play();
-        icon.textContent = '🔊';
+        button.textContent = '🔊';
       }
       isPlaying = !isPlaying;
-    });
-
-    widget.bind(SC.Widget.Events.FINISH, () => {
-      widget.seekTo(0);
-      widget.play();
     });
   </script>
 
