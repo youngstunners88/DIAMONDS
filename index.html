@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>$DIAMONDS Protocol Video Library - Mine the Future of ETH Rewards</title>
     <meta name="description" content="$DIAMONDS Protocol - Mine the future of ETH rewards through blockchain-powered staking, mining, and diamond rewards on Ethereum.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        /* VIDEO BACKGROUND - Fixed position with full coverage */
+        /* VIDEO BACKGROUND */
         #video-background {
             position: fixed;
             top: 50%;
@@ -25,15 +25,15 @@
             object-fit: cover;
         }
         
-        /* MAIN BODY STYLES - Removed static background image */
+        /* MAIN BODY STYLES */
         body { 
             font-family: 'Crimson Text', serif; 
             color: #f5f5dc; 
             overflow-x: hidden; 
             position: relative;
+            scroll-behavior: smooth;
         }
         
-        /* Semi-transparent dark overlay for readability */
         body::before {
             content: '';
             position: fixed;
@@ -46,10 +46,122 @@
             pointer-events: none;
         }
         
-        header { position: fixed; top: 0; width: 100%; padding: 1rem 5%; background: linear-gradient(180deg, rgba(61, 43, 31, 0.95) 0%, rgba(40, 28, 20, 0.95) 100%); backdrop-filter: blur(10px); border-bottom: 4px solid #8B6914; border-top: 3px solid #CD853F; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3); z-index: 1000; display: flex; justify-content: space-between; align-items: center; background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 105, 20, 0.1) 2px, rgba(139, 105, 20, 0.1) 4px); }
-        .logo-container { display: flex; align-items: center; gap: 1.5rem; padding: 0.5rem; background: rgba(20, 15, 10, 0.6); border: 3px solid #8B6914; border-radius: 8px; box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.3), 0 0 15px rgba(139, 105, 20, 0.5); }
-        .logo-img { height: 65px; filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); animation: logoGlow 3s infinite alternate; }
-        @keyframes logoGlow { from { filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); } to { filter: drop-shadow(0 0 30px rgba(0, 191, 255, 1)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); } }
+        /* MUSIC TOGGLE BUTTON */
+        #musicToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 105, 20, 0.9);
+            border: 2px solid #00BFFF;
+            border-radius: 50%;
+            color: #FFD700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #musicToggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
+        }
+        
+        #musicToggle.playing {
+            animation: pulse 2s infinite;
+        }
+        
+        /* MODAL FOR IMAGE */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid #8B6914;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+            transition: all 0.3s;
+        }
+        
+        .close:hover {
+            color: #00BFFF;
+            transform: scale(1.2);
+        }
+        
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 1rem 5%; 
+            background: linear-gradient(180deg, rgba(61, 43, 31, 0.95) 0%, rgba(40, 28, 20, 0.95) 100%); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 4px solid #8B6914; 
+            border-top: 3px solid #CD853F; 
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3); 
+            z-index: 1000; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 105, 20, 0.1) 2px, rgba(139, 105, 20, 0.1) 4px); 
+        }
+        
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.5rem; 
+            padding: 0.5rem; 
+            background: rgba(20, 15, 10, 0.6); 
+            border: 3px solid #8B6914; 
+            border-radius: 8px; 
+            box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.3), 0 0 15px rgba(139, 105, 20, 0.5); 
+        }
+        
+        .logo-img { 
+            height: 65px; 
+            filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); 
+            animation: logoGlow 3s infinite alternate; 
+        }
+        
+        @keyframes logoGlow { 
+            from { filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); } 
+            to { filter: drop-shadow(0 0 30px rgba(0, 191, 255, 1)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); } 
+        }
+        
         .tagline-link { text-decoration: none; transition: all 0.3s; display: inline-block; }
         .tagline { font-family: 'IM Fell English', serif; font-size: 1rem; color: #FFD700; font-weight: 400; font-style: italic; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5); letter-spacing: 1px; cursor: pointer; transition: all 0.3s; position: relative; }
         .tagline:before { content: '💎'; position: absolute; left: -25px; opacity: 0; transition: all 0.3s; font-size: 0.9rem; }
@@ -61,7 +173,6 @@
         @keyframes twinkle { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.9); } }
         .cta-link:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 40px rgba(0, 191, 255, 0.8), inset 0 2px 0 rgba(205, 133, 63, 0.7), 0 6px 0 rgba(0, 0, 0, 0.4); transform: translateY(-3px); }
         
-        /* HERO SECTION */
         .hero { 
             min-height: 100vh; 
             display: flex; 
@@ -100,7 +211,6 @@
         @keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
         .hero-cta:hover { background: linear-gradient(180deg, #9B7714 0%, #754321 50%, #4d3b2f 100%); box-shadow: 0 0 60px rgba(255, 69, 0, 1), inset 0 3px 0 rgba(205, 133, 63, 0.7), 0 8px 0 rgba(0, 0, 0, 0.5); transform: scale(1.05) translateY(-2px); }
         
-        /* FEATURES */
         .features { 
             padding: 5rem 5%; 
             background: rgba(10, 15, 46, 0.75); 
@@ -111,7 +221,17 @@
             margin: 0 auto; 
         }
         
-        .feature-card { background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%); border: 5px solid #8B6914; border-radius: 5px; overflow: hidden; transition: all 0.3s; box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(139, 105, 20, 0.1), 0 8px 0 rgba(0, 0, 0, 0.3); position: relative; }
+        .feature-card { 
+            background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%); 
+            border: 5px solid #8B6914; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            transition: all 0.3s; 
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(139, 105, 20, 0.1), 0 8px 0 rgba(0, 0, 0, 0.3); 
+            position: relative;
+            cursor: pointer;
+        }
+        
         .feature-card:before { content: '★'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: #8B6914; z-index: 10; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); animation: starRotate 4s infinite; }
         .feature-card:after { content: '★'; position: absolute; top: 10px; right: 10px; font-size: 2rem; color: #8B6914; z-index: 10; text-shadow: 0 0 10px rgba(0, 191, 255, 0.5); animation: starRotate 4s infinite 2s; }
         @keyframes starRotate { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
@@ -122,12 +242,12 @@
         
         .feature-card h3 { padding: 1.2rem 1rem; font-family: 'Cinzel', serif; color: #3d2b1f; text-align: center; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 1px 1px 0 rgba(139, 105, 20, 0.3), 0 0 20px rgba(0, 191, 255, 0.2); background: rgba(139, 105, 20, 0.1); border-top: 2px dashed #8B6914; line-height: 1.4; }
         
-        /* VIDEO SECTION */
         .video-section { 
             padding: 5rem 5%; 
             background: rgba(26, 31, 58, 0.75); 
             position: relative; 
         }
+        
         .video-section:before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: repeating-linear-gradient(90deg, #8B6914 0px, #8B6914 20px, #CD853F 20px, #CD853F 40px); box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); }
         
         .section-header { text-align: center; margin-bottom: 4rem; padding: 2rem; background: rgba(40, 28, 20, 0.8); border: 4px solid #8B6914; border-radius: 10px; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 4rem; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.3); }
@@ -142,17 +262,16 @@
         .video-card:hover { transform: translateY(-12px) rotate(-1deg); box-shadow: 0 0 50px rgba(0, 191, 255, 0.9), inset 0 0 40px rgba(139, 105, 20, 0.2), 0 15px 0 rgba(0, 0, 0, 0.4); }
         .video-card iframe { width: 100%; height: 240px; border: none; border-bottom: 3px solid #8B6914; }
         
-        /* OPERATOR SECTION */
         .operator-section { 
             padding: 5rem 5%; 
             background: rgba(10, 15, 46, 0.75); 
             position: relative; 
         }
+        
         .operator-container { position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto; padding: 3rem; background: rgba(40, 28, 20, 0.9); border: 4px solid #8B6914; border-radius: 10px; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4); }
         .operator-container h2 { font-family: 'Rye', serif; font-size: 2.8rem; color: #FFD700; margin-bottom: 1.5rem; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 191, 255, 0.6); }
         .operator-container p { font-family: 'IM Fell English', serif; font-size: 1.4rem; color: #F5DEB3; margin-bottom: 3rem; font-style: italic; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.5); border-bottom: 2px solid rgba(139, 105, 20, 0.5); padding: 1.5rem 0; }
         
-        /* FOOTER */
         footer { 
             padding: 4rem 5%;
             background: rgba(61, 43, 31, 0.85); 
@@ -227,31 +346,119 @@
         }
         
         footer a { color: #FFD700; text-decoration: none; margin: 0 2rem; font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5); border-bottom: 2px solid transparent; position: relative; }
-        
         footer a:before { content: '◆'; position: absolute; left: -15px; color: #00BFFF; font-size: 0.8rem; opacity: 0; transition: all 0.3s; }
         footer a:hover:before { opacity: 1; left: -20px; }
-        
         footer a:hover { color: #00BFFF; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 1); border-bottom: 2px solid #00BFFF; transform: translateY(-2px); }
-        
         footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; }
         
-        /* Mobile Responsive */
+        /* MOBILE OPTIMIZATIONS */
         @media (max-width: 768px) { 
-            header { flex-direction: column; gap: 1rem; padding: 1rem 3%; } 
-            .logo-img { height: 50px; } 
-            .tagline { font-size: 0.85rem; text-align: center; } 
-            .hero h1 { font-size: 2.5rem; letter-spacing: 2px; } 
+            header { 
+                flex-direction: column; 
+                gap: 1rem; 
+                padding: 1rem 3%; 
+                position: sticky; 
+                top: 0; 
+            } 
+            .logo-container { 
+                flex-direction: column; 
+                gap: 0.5rem; 
+                text-align: center; 
+                width: 100%; 
+                max-width: 300px; 
+            }
+            .logo-img { height: 55px; } 
+            .tagline { font-size: 0.9rem; } 
+            .cta-link { 
+                padding: 0.7rem 1.5rem; 
+                font-size: 0.85rem; 
+                letter-spacing: 1px; 
+            }
+            .hero { 
+                padding: 100px 5% 40px; 
+                min-height: auto; 
+                padding-bottom: 80px;
+            }
+            .hero-content { 
+                padding: 2rem 1.5rem; 
+                margin: 0 1rem; 
+            }
+            .hero h1 { 
+                font-size: 2.2rem; 
+                letter-spacing: 1px; 
+            } 
             .hero h1:before, .hero h1:after { display: none; } 
-            .hero h2 { font-size: 1.2rem; } 
-            .hero-cta { padding: 1.2rem 2.5rem; font-size: 1.1rem; } 
-            .section-header h2 { font-size: 2.2rem; } 
-            .video-grid, .features { grid-template-columns: 1fr; gap: 2rem; } 
-            .operator-container h2 { font-size: 2.2rem; }
-            footer .logo-img { height: 80px; }
-            .footer-logo-social-container { flex-direction: column; gap: 2rem; }
-            .social-icon { width: 50px; height: 50px; padding: 10px; }
-            #video-background { display: none; } /* Hide video on mobile for performance */
+            .hero h2 { 
+                font-size: 1.1rem; 
+                padding: 1rem 0; 
+            } 
+            .hero-cta { 
+                padding: 1rem 2.5rem; 
+                font-size: 1rem; 
+                display: block; 
+                width: 90%; 
+                margin: 0 auto; 
+            }
+            .features { 
+                padding: 3rem 5%; 
+                gap: 1.5rem; 
+            }
+            .feature-card img { height: 200px; }
+            .section-header { 
+                padding: 1.5rem 1rem; 
+                margin: 0 1rem 3rem; 
+            }
+            .section-header h2 { 
+                font-size: 1.8rem; 
+                letter-spacing: 2px; 
+            } 
+            .video-grid, .features { 
+                grid-template-columns: 1fr; 
+                gap: 1.5rem; 
+            } 
+            .operator-container { 
+                padding: 2rem 1rem; 
+                margin: 0 1rem; 
+            }
+            .operator-container h2 { 
+                font-size: 1.8rem; 
+            }
+            .operator-container p { 
+                font-size: 1.1rem; 
+                padding: 1rem 0; 
+            }
+            footer { 
+                padding: 3rem 5%; 
+            }
+            footer .logo-img { 
+                height: 80px; 
+            }
+            .footer-logo-social-container { 
+                flex-direction: column; 
+                gap: 2rem; 
+            }
+            .social-icon { 
+                width: 50px; 
+                height: 50px; 
+                padding: 10px; 
+            }
+            #video-background { display: none; }
             body { background: linear-gradient(135deg, #0a0f2e, #1a1f3a); }
+            
+            /* Improve touch targets */
+            .feature-card, .video-card, .social-icon {
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(0, 191, 255, 0.3);
+            }
+            
+            /* Better spacing for music toggle on mobile */
+            #musicToggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -261,6 +468,23 @@
         <source src="https://i.imgur.com/jelMaT8.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+
+    <!-- BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop>
+        <!-- Replace the src URL with your GitHub-hosted audio file -->
+        <source src="YOUR_GITHUB_AUDIO_URL_HERE.mp3" type="audio/mpeg">
+        <source src="YOUR_GITHUB_AUDIO_URL_HERE.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- MUSIC TOGGLE BUTTON -->
+    <button id="musicToggle" title="Toggle Music">🎵</button>
+
+    <!-- IMAGE MODAL -->
+    <div id="imageModal" class="modal">
+        <span class="close" id="modalClose">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
     <header>
         <div class="logo-container">
@@ -282,15 +506,15 @@
     </section>
 
     <section class="features">
-        <div class="feature-card">
+        <div class="feature-card" data-link="https://x.com/blaze3win/status/1988267932195987507?s=46" data-type="external">
             <img src="" alt="Diamond Certificate" id="certImg">
             <h3>Diamond Mine Share Certificates</h3>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-link="http://richs-crypto-projects.gitbook.io" data-type="external">
             <img src="" alt="DIAMONDS Scroll" id="scrollImg">
             <h3>Ancient Diamond Wisdom</h3>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-link="https://i.imgur.com/T4T3LoM.png" data-type="modal">
             <img src="" alt="Diamond Wagon" id="wagonImg">
             <h3>ETH Rewards Transport</h3>
         </div>
@@ -322,17 +546,14 @@
 
     <footer>
         <div class="footer-logo-social-container">
-            <!-- X/Twitter Icon -->
             <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt X (Twitter)">
             </a>
             
-            <!-- DIAMONDS Logo -->
             <div class="logo-container-footer">
                 <img src="" alt="$DIAMONDS Logo" class="logo-img" id="footerLogo">
             </div>
             
-            <!-- Telegram Icon -->
             <a href="https://t.me/blazedefi/52421" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z'/%3E%3C/svg%3E" alt="Telegram">
             </a>
@@ -350,26 +571,23 @@
         // === VIDEO BACKGROUND CONTROL ===
         const video = document.getElementById('video-background');
         
-        // Configure video for ping-pong loop (forward then reverse)
         if (video) {
             video.addEventListener('ended', () => {
-                video.playbackRate = -1; // Reverse playback
+                video.playbackRate = -1;
                 video.play();
             });
             
             video.addEventListener('play', () => {
                 if (video.playbackRate < 0 && video.currentTime <= 0) {
-                    video.currentTime = video.duration; // Reset to end for reverse playback
+                    video.currentTime = video.duration;
                 }
             });
             
-            // Ensure video autoplays on mobile
             video.muted = true;
             video.play().catch(e => {
                 console.log('Autoplay prevented:', e);
-                // Fallback: show play button if autoplay fails
                 const playButton = document.createElement('button');
-                playButton.textContent = '▶ Play Background Video';
+                playButton.textContent = '▶ Play Video';
                 playButton.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:1001;padding:10px;background:rgba(139,105,20,0.9);color:#FFD700;border:2px solid #00BFFF;border-radius:5px;cursor:pointer;';
                 playButton.onclick = () => video.play();
                 document.body.appendChild(playButton);
@@ -399,6 +617,108 @@
             particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
             particlesContainer.appendChild(particle);
         }
+
+        // === CLICKABLE FEATURE CARDS ===
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const link = this.dataset.link;
+                const type = this.dataset.type;
+                
+                if (type === 'external') {
+                    window.open(link, '_blank', 'noopener,noreferrer');
+                } else if (type === 'modal') {
+                    const modal = document.getElementById('imageModal');
+                    const modalImg = document.getElementById('modalImage');
+                    modal.style.display = 'block';
+                    modalImg.src = link;
+                }
+            });
+        });
+
+        // === MODAL CLOSE ===
+        const modal = document.getElementById('imageModal');
+        const modalClose = document.getElementById('modalClose');
+        
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // === BACKGROUND MUSIC ===
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isPlaying = false;
+        
+        // IMPORTANT: Replace the audio source in the HTML with your GitHub URL
+        // Example: <source src="https://raw.githubusercontent.com/yourusername/repo/main/song.mp3" type="audio/mpeg">
+        
+        musicToggle.addEventListener('click', () => {
+            if (!bgMusic.src || bgMusic.src.includes('YOUR_GITHUB_AUDIO_URL_HERE')) {
+                alert('Please add your audio file URL to the audio element in the HTML.');
+                return;
+            }
+            
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = '🎵';
+                musicToggle.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicToggle.textContent = '⏸️';
+                    musicToggle.classList.add('playing');
+                    isPlaying = true;
+                }).catch(e => {
+                    console.log('Audio play failed:', e);
+                    alert('Audio autoplay blocked. Please interact with the page first, then try again.');
+                });
+            }
+        });
+        
+        // Resume music after user interaction (mobile requirement)
+        document.addEventListener('click', function initAudio() {
+            if (bgMusic.src && !bgMusic.src.includes('YOUR_GITHUB_AUDIO_URL_HERE') && !isPlaying) {
+                bgMusic.volume = 0.3; // Set initial volume
+            }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        // === MOBILE TOUCH IMPROVEMENTS ===
+        if ('ontouchstart' in window) {
+            // Add touch feedback for cards
+            document.querySelectorAll('.feature-card, .video-card, .social-icon, .cta-link, .hero-cta').forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.97)';
+                    this.style.transition = 'transform 0.1s';
+                });
+                el.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                    setTimeout(() => {
+                        this.style.transition = 'all 0.3s';
+                    }, 100);
+                });
+            });
+            
+            // Prevent zoom on double tap for iOS
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        }
+
+        // === PERFORMANCE: LAZY LOAD YOUTUBE VIDEOS ===
+        document.querySelectorAll('.video-card iframe').forEach(iframe => {
+            iframe.setAttribute('loading', 'lazy');
+        });
     </script>
 </body>
 </html>
