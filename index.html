@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$DIAMONDS Protocol Video Library - Mine the Future of ETH Rewards</title>
     <meta name="description" content="$DIAMONDS Protocol - Mine the future of ETH rewards through blockchain-powered staking, mining, and diamond rewards on Ethereum.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         /* VIDEO BACKGROUND */
         #video-background {
@@ -39,8 +39,12 @@
             font-family: 'Crimson Text', serif; 
             color: #f5f5dc; 
             overflow-x: hidden; 
+            background-image: url('https://i.imgur.com/xxifKEi.png');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             position: relative;
-            scroll-behavior: smooth;
         }
         
         body::before {
@@ -55,45 +59,10 @@
             pointer-events: none;
         }
         
-        header { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            padding: 1rem 5%; 
-            background: linear-gradient(180deg, rgba(61, 43, 31, 0.95) 0%, rgba(40, 28, 20, 0.95) 100%); 
-            backdrop-filter: blur(10px); 
-            border-bottom: 4px solid #8B6914; 
-            border-top: 3px solid #CD853F; 
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3); 
-            z-index: 1000; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 105, 20, 0.1) 2px, rgba(139, 105, 20, 0.1) 4px); 
-        }
-        
-        .logo-container { 
-            display: flex; 
-            align-items: center; 
-            gap: 1.5rem; 
-            padding: 0.5rem; 
-            background: rgba(20, 15, 10, 0.6); 
-            border: 3px solid #8B6914; 
-            border-radius: 8px; 
-            box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.3), 0 0 15px rgba(139, 105, 20, 0.5); 
-        }
-        
-        .logo-img { 
-            height: 65px; 
-            filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); 
-            animation: logoGlow 3s infinite alternate; 
-        }
-        
-        @keyframes logoGlow { 
-            from { filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); } 
-            to { filter: drop-shadow(0 0 30px rgba(0, 191, 255, 1)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); } 
-        }
-        
+        header { position: fixed; top: 0; width: 100%; padding: 1rem 5%; background: linear-gradient(180deg, rgba(61, 43, 31, 0.95) 0%, rgba(40, 28, 20, 0.95) 100%); backdrop-filter: blur(10px); border-bottom: 4px solid #8B6914; border-top: 3px solid #CD853F; box-shadow: 0 0 30px rgba(0, 191, 255, 0.4), inset 0 2px 0 rgba(205, 133, 63, 0.5), 0 8px 0 rgba(0, 0, 0, 0.3); z-index: 1000; display: flex; justify-content: space-between; align-items: center; background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 105, 20, 0.1) 2px, rgba(139, 105, 20, 0.1) 4px); }
+        .logo-container { display: flex; align-items: center; gap: 1.5rem; padding: 0.5rem; background: rgba(20, 15, 10, 0.6); border: 3px solid #8B6914; border-radius: 8px; box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.3), 0 0 15px rgba(139, 105, 20, 0.5); }
+        .logo-img { height: 65px; filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); animation: logoGlow 3s infinite alternate; }
+        @keyframes logoGlow { from { filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); } to { filter: drop-shadow(0 0 30px rgba(0, 191, 255, 1)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)); } }
         .tagline-link { text-decoration: none; transition: all 0.3s; display: inline-block; }
         .tagline { font-family: 'IM Fell English', serif; font-size: 1rem; color: #FFD700; font-weight: 400; font-style: italic; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5); letter-spacing: 1px; cursor: pointer; transition: all 0.3s; position: relative; }
         .tagline:before { content: '💎'; position: absolute; left: -25px; opacity: 0; transition: all 0.3s; font-size: 0.9rem; }
@@ -283,105 +252,23 @@
         footer a:hover { color: #00BFFF; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 1); border-bottom: 2px solid #00BFFF; transform: translateY(-2px); }
         footer p { margin-top: 2rem; color: #CD853F; font-family: 'IM Fell English', serif; font-size: 1rem; font-style: italic; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); border-top: 2px solid rgba(139, 105, 20, 0.3); padding-top: 1.5rem; }
         
-        /* MOBILE OPTIMIZATIONS */
+        /* Original Mobile CSS - Reverted */
         @media (max-width: 768px) { 
-            header { 
-                flex-direction: column; 
-                gap: 1rem; 
-                padding: 1rem 3%; 
-                position: sticky; 
-                top: 0; 
-            } 
-            .logo-container { 
-                flex-direction: column; 
-                gap: 0.5rem; 
-                text-align: center; 
-                width: 100%; 
-                max-width: 300px; 
-            }
-            .logo-img { height: 55px; } 
-            .tagline { font-size: 0.9rem; } 
-            .cta-link { 
-                padding: 0.7rem 1.5rem; 
-                font-size: 0.85rem; 
-                letter-spacing: 1px; 
-            }
-            .hero { 
-                padding: 100px 5% 40px; 
-                min-height: auto; 
-                padding-bottom: 80px;
-            }
-            .hero-content { 
-                padding: 2rem 1.5rem; 
-                margin: 0 1rem; 
-            }
-            .hero h1 { 
-                font-size: 2.2rem; 
-                letter-spacing: 1px; 
-            } 
+            header { flex-direction: column; gap: 1rem; padding: 1rem 3%; } 
+            .logo-img { height: 50px; } 
+            .tagline { font-size: 0.85rem; text-align: center; } 
+            .hero h1 { font-size: 2.5rem; letter-spacing: 2px; } 
             .hero h1:before, .hero h1:after { display: none; } 
-            .hero h2 { 
-                font-size: 1.1rem; 
-                padding: 1rem 0; 
-            } 
-            .hero-cta { 
-                padding: 1rem 2.5rem; 
-                font-size: 1rem; 
-                display: block; 
-                width: 90%; 
-                margin: 0 auto; 
-            }
-            .features { 
-                padding: 3rem 5%; 
-                gap: 1.5rem; 
-            }
-            .feature-card img { height: 200px; }
-            .section-header { 
-                padding: 1.5rem 1rem; 
-                margin: 0 1rem 3rem; 
-            }
-            .section-header h2 { 
-                font-size: 1.8rem; 
-                letter-spacing: 2px; 
-            } 
-            .video-grid, .features { 
-                grid-template-columns: 1fr; 
-                gap: 1.5rem; 
-            } 
-            .operator-container { 
-                padding: 2rem 1rem; 
-                margin: 0 1rem; 
-            }
-            .operator-container h2 { 
-                font-size: 1.8rem; 
-            }
-            .operator-container p { 
-                font-size: 1.1rem; 
-                padding: 1rem 0; 
-            }
-            footer { 
-                padding: 3rem 5%; 
-            }
-            footer .logo-img { 
-                height: 80px; 
-            }
-            .footer-logo-social-container { 
-                flex-direction: column; 
-                gap: 2rem; 
-            }
-            .social-icon { 
-                width: 50px; 
-                height: 50px; 
-                padding: 10px; 
-            }
+            .hero h2 { font-size: 1.2rem; } 
+            .hero-cta { padding: 1.2rem 2.5rem; font-size: 1.1rem; } 
+            .section-header h2 { font-size: 2.2rem; } 
+            .video-grid, .features { grid-template-columns: 1fr; gap: 2rem; } 
+            .operator-container h2 { font-size: 2.2rem; }
+            footer .logo-img { height: 80px; }
+            .footer-logo-social-container { flex-direction: column; gap: 2rem; }
+            .social-icon { width: 50px; height: 50px; padding: 10px; }
             #video-background { display: none; }
             body { background: linear-gradient(135deg, #0a0f2e, #1a1f3a); }
-            
-            /* Simplified interactions for mobile */
-            .feature-card, .video-card, .social-icon {
-                cursor: pointer;
-                -webkit-tap-highlight-color: rgba(0, 191, 255, 0.3);
-            }
         }
     </style>
 </head>
@@ -392,7 +279,7 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- SOUNDCLOUD AUDIO PLAYER (Hidden) -->
+    <!-- SOUNDCLOUD AUDIO PLAYER (Auto-playing, hidden) -->
     <iframe id="soundcloud-player" 
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2253853805&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false" 
             width="0" 
@@ -467,7 +354,7 @@
     <footer>
         <div class="footer-logo-social-container">
             <a href="https://x.com/blaze3win?s=21" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X (Twitter)">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt X (Twitter)">
             </a>
             
             <div class="logo-container-footer">
@@ -504,7 +391,6 @@
             });
             
             video.muted = true;
-            // Removed fallback button - just fail silently
             video.play().catch(e => {
                 console.log('Autoplay prevented:', e);
             });
@@ -563,11 +449,6 @@
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
-        });
-
-        // === LAZY LOAD VIDEOS ===
-        document.querySelectorAll('.video-card iframe').forEach(iframe => {
-            iframe.setAttribute('loading', 'lazy');
         });
     </script>
 </body>
