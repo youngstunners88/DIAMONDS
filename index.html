@@ -369,6 +369,67 @@
             }
         }
     </style>
+    <style id="facelift">
+        /* ---- Facelift: additive layer. Nothing above is removed or renamed. ---- */
+        html { scroll-behavior: smooth; }
+        body { line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+        /* Keyboard users could not see where focus was. */
+        a:focus-visible, button:focus-visible, .feature-card:focus-visible,
+        .audio-control:focus-visible {
+            outline: 3px solid #00BFFF; outline-offset: 3px; border-radius: 4px;
+        }
+
+        /* Headings were fixed-size and overflowed on phones. */
+        .hero h1 { font-size: clamp(2rem, 6.2vw, 3.8rem); line-height: 1.15; }
+        .hero h2 { font-size: clamp(1.1rem, 3vw, 1.5rem); line-height: 1.5; }
+        .section-header h2 { font-size: clamp(1.6rem, 4.6vw, 3.2rem); line-height: 1.2; }
+        .operator-container h2 { font-size: clamp(1.5rem, 4vw, 2.8rem); }
+        .operator-container p { font-size: clamp(1.1rem, 2.6vw, 1.4rem); }
+        .hero-content { padding: clamp(1.25rem, 4vw, 3rem); }
+        .hero-cta { padding: 1.1rem clamp(1.5rem, 5vw, 4rem); }
+
+        /* Decorative brackets sat outside the viewport on narrow screens. */
+        @media (max-width: 900px) {
+            .hero h1:before, .hero h1:after { display: none; }
+        }
+
+        /* On phones the header stacks into two tall rows; pinned, it covered about a
+           fifth of the screen and sat on top of the content. Let it scroll away. */
+        @media (max-width: 768px) {
+            header { position: relative; }
+        }
+
+        /* ---- Smoke game section ---- */
+        .smoke-game-section { position: relative; padding: clamp(2.5rem, 6vw, 5rem) 5%;
+            background: rgba(10, 15, 46, 0.75); }
+        .smoke-game-card { max-width: 920px; margin: 0 auto; padding: clamp(1.5rem, 4vw, 3rem);
+            background: linear-gradient(180deg, #f5f5dc 0%, #e8dcc0 100%);
+            border: 5px solid #8B6914; border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55); color: #2b1d12; }
+        .smoke-game-card h2 { font-family: 'Rye', serif; color: #3d2b1f;
+            font-size: clamp(1.5rem, 4vw, 2.4rem); margin-bottom: 1rem; text-align: center; }
+        .smoke-game-card p { font-family: 'Crimson Text', serif; color: #2b1d12;
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem); margin-bottom: 1rem; }
+        .smoke-game-card .fine { font-size: 1rem; color: #4a3826; font-style: italic; }
+        .smoke-game-actions { display: flex; flex-wrap: wrap; gap: 1rem;
+            justify-content: center; margin-top: 1.75rem; }
+        .smoke-game-actions a { font-family: 'Cinzel', serif; font-weight: 700;
+            text-decoration: none; padding: 0.95rem 1.8rem; border-radius: 6px;
+            border: 3px solid #8B6914; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .smoke-game-actions .primary { background: linear-gradient(180deg, #8B6914 0%, #654321 50%, #3d2b1f 100%);
+            color: #FFD700; }
+        .smoke-game-actions .secondary { background: transparent; color: #3d2b1f; }
+        .smoke-game-actions a:hover { transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(0, 191, 255, 0.45); }
+
+        /* Twinkling ornaments and drifting particles: off for people who asked. */
+        @media (prefers-reduced-motion: reduce) {
+            .particle, .cta-link:before, .cta-link:after,
+            .hero h1:before, .hero h1:after { animation: none !important; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
 </head>
 <body>
     <!-- VIDEO BACKGROUND -->
@@ -430,6 +491,25 @@
         </div>
     </section>
 
+    <section class="smoke-game-section" id="smoke-game" aria-labelledby="smoke-game-heading">
+        <div class="smoke-game-card">
+            <h2 id="smoke-game-heading">🎮 Play Lil Blunt: The Smoke Realm</h2>
+            <p><strong>Lil Blunt: The Smoke Realm</strong> is a free 2D side-scrolling
+            platformer you play in your web browser on desktop or mobile. There is no
+            download, no account and no wallet needed.</p>
+            <p>It is a game set around the SMOKE, $DIAMONDS and GOLD protocols. Its three
+            stages each have a learning room about one of them, and Stage 2 covers
+            $DIAMONDS.</p>
+            <p class="fine">Playing the game is free and does not pay out tokens, NFTs or ETH
+            rewards. Scores on the game site are demonstration data, not recorded on a
+            blockchain.</p>
+            <div class="smoke-game-actions">
+                <a class="primary" href="https://www.smokegame.win/" target="_blank" rel="noopener">Play at smokegame.win</a>
+                <a class="secondary" href="https://youngstunners88.itch.io/lil-blunt-adventure" target="_blank" rel="noopener">Also on itch.io</a>
+            </div>
+        </div>
+    </section>
+
     <section class="video-section">
         <div class="section-header">
             <h2>⛏️ Official $DIAMONDS Video Library</h2>
@@ -472,6 +552,7 @@
         <div>
             <a href="http://diamonds1111.win" target="_blank">Protocol</a>
             <a href="https://ethereum.org" target="_blank">Ethereum</a>
+            <a href="https://www.smokegame.win/" target="_blank" rel="noopener">Smoke Game</a>
         </div>
         <p>© 2026 $DIAMONDS Protocol. Built on Ethereum.</p>
     </footer>
