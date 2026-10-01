@@ -423,6 +423,22 @@
         .smoke-game-actions a:hover { transform: translateY(-2px);
             box-shadow: 0 6px 22px rgba(0, 191, 255, 0.45); }
 
+        /* ---- Pass 2: spacing and polish ---- */
+        .features { padding: clamp(2rem, 6vw, 5rem) 5%; }
+        .video-section { padding: clamp(2rem, 6vw, 5rem) 5%; }
+        .section-header { margin-bottom: clamp(1.5rem, 4vw, 4rem); padding: clamp(1rem, 3vw, 2rem); }
+        .feature-card h3 { font-size: clamp(1rem, 2.4vw, 1.1rem); }
+        .feature-card:hover { transform: translateY(-6px); }
+        .feature-card:active { transform: translateY(-2px); }
+        .hero-cta:focus-visible { outline: 3px solid #00BFFF; outline-offset: 4px; }
+        @media (max-width: 768px) {
+            .feature-card img { height: 200px; }
+            .feature-card:hover { transform: none; }
+            /* The fixed mute button sat on top of the last card; leave room under the footer. */
+            footer { padding-bottom: 5.5rem; }
+            .hero-cta:before, .hero-cta:after { display: none; }
+        }
+
         /* Twinkling ornaments and drifting particles: off for people who asked. */
         @media (prefers-reduced-motion: reduce) {
             .particle, .cta-link:before, .cta-link:after,
